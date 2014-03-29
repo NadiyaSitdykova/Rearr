@@ -7,7 +7,7 @@ def raw_data_to_grimm(n, interest, gff_inputs, tabtext_input, output):
         parse_gff.median_parsegff(gff_inputs[i], gff[i])
 
     families = {}
-    parse_tabtext.parse(tabtext_input, interest, families)
+    parse_tabtext.parse(tabtext_input, interest, families, gff)
 
     grimm = [{} for _ in range(0, n)]
     for blockID, geneId in families.items():
@@ -29,4 +29,9 @@ def raw_data_to_grimm(n, interest, gff_inputs, tabtext_input, output):
                 for coordinate in sorted(blocks.keys()):
                     print(blocks[coordinate], end=' ', file=out)
                 print(file=out)
+
+    with open("stat_of_number_of_fragments.txt", 'w') as out:
+        for i in range(0, n):
+            print(interest[i], file=out)
+            print(len(grimm[i]), file=out)
 
