@@ -68,6 +68,16 @@ def get_right(s):
     else:
         return s + 't'
 
+def get_initial_fragment_ends():
+    g, names = [], []
+    read_genomes(source_data, g, names)
+    initial_fragment_ends = [{} for i in range(0, len(g))]
+    for i in range(0, len(g)): #genome
+        for j in range(0, len(g[i])): #chromosome
+            initial_fragment_ends[i][get_right(g[i][j][0])] = True # left end of chromosome
+            initial_fragment_ends[i][get_left(g[i][j][len(g[i][j]) - 1])] = True # right end of chromosome
+    return initial_fragment_ends
+
 def process_logfile(g, names):
     positive = [[{} for _ in range(0, len(g))] for _ in range(0, 2)]
     with open("mgra.log") as file:
@@ -133,7 +143,7 @@ def iteration():
                 if label1 in real_breakages[j] and real_breakages[j][label1] == label2:
                     tp[i] += 1
                     tp[2] += 1
-                else:
+                elif label1 in initial_fragment_ends[j] and label2 in initial_fragment_ends[j] or label1 in real_breakages[j] and label2 in real_breakages:
                     fp[i] += 1
                     fp[2] += 1
 
@@ -146,10 +156,11 @@ def iteration():
 
     return tp, fp, fn
 
-count_of_iterations = 100
+count_of_iterations = 1
 source_data = "MRDQHC.txt"
 
 TP, FP, FN = [], [], []
+initial_fragment_ends = get_initial_fragment_ends()
 for i in range(0, count_of_iterations):
     print(i)
     tp, fp, fn = iteration()
@@ -165,6 +176,7 @@ with open("statistic.txt", 'w') as out:
     print("True positive: " + str(tp), file=out)
     print("False positive: " + str(fp), file=out)
     print("False negative: " + str(fn), file=out)
+
 
 
 

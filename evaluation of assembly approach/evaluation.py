@@ -81,15 +81,25 @@ def get_initial_fragment_ends():
 def process_logfile(g, names):
     positive = [[{} for _ in range(0, len(g))] for _ in range(0, 2)]
     with open("mgra.log") as file:
-        is_init = True
-        useful_info = False
+        stage_number = 0
+        cur_line_is_fusions_info_on_stage12 = False
+        cur_line_is_fusion_info_on_stage1 = False
+        cur_line_is_2break_info_on_stage2 = False
         for line in file:
-            if not useful_info:
-                if line.strip() == "Stage 12: Merging double VTconcistent irregular edges":
-                    useful_info = True
-                elif line.strip() == "Stage: 1":
-                    is_init = False
-            else:
+            if line.strip() == "Stage 12: Merging double VTconcistent irregular edges":
+                    cur_line_is_fusions_info_on_stage12 = True
+
+            elif line.strip() == "Stage: 1":
+                    stage_number = 1
+
+            elif line.strip() == "Stage: 2":
+                    stage_number = 2
+                    cur_line_is_2break_info_on_stage2 = True
+
+            elif stage_number == 1 and line.strip() == "... semi-cycle, fusion applied":
+                cur_line_is_fusion_info_on_stage1 = True
+
+            elif cur_line_is_fusions_info_on_stage12:
                 if line.strip() != "0 2-breaks performed":
                     blocks = line.split()
                     for i in range(0, len(blocks) - 3):
@@ -98,11 +108,33 @@ def process_logfile(g, names):
                         tmp = X[1].split(':')
                         label2 = tmp[0].split(',')[0][1:]
                         genome = names.index(tmp[1][1])
-                        if is_init:
+                        if stage_number == 0:
                             positive[0][genome][label1] = label2
                         else:
                             positive[1][genome][label1] = label2
-                useful_info = False
+                cur_line_is_fusions_info_on_stage12 = False
+
+            elif cur_line_is_fusion_info_on_stage1:
+                blocks = line.split()
+                X = blocks[0].split('x')
+                label1 = X[0][4:(len(X[0]) - 1)]
+                tmp = X[1].split(':')
+                label2 = tmp[0][4:(len(tmp[0]) - 1)]
+                genome = names.index(tmp[1][1])
+                positive[1][genome][label1] = label2
+                cur_line_is_fusion_info_on_stage1 = False
+
+            elif cur_line_is_2break_info_on_stage2:
+                if len(line.split()) > 1:
+                    cur_line_is_2break_info_on_stage2 = False
+                else:
+                    X = line.split('x')
+                    label1 = X[0].split(',')[0][2:]
+                    tmp = X[1].split(':')
+                    label2 = tmp[0].split(',')[0][1:]
+                    genome = names.index(tmp[1][1])
+                    if X[0].split(',')[1] == "oo)" and tmp[0].split(',')[1] == "oo)":
+                        positive[1][genome][label1] = label2
     return positive
 
 def breakage(g, real_breakages):
@@ -156,7 +188,7 @@ def iteration():
 
     return tp, fp, fn
 
-count_of_iterations = 1
+count_of_iterations = 100
 source_data = "MRDQHC.txt"
 
 TP, FP, FN = [], [], []
