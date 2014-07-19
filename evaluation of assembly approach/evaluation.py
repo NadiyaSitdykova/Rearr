@@ -152,12 +152,11 @@ def breakage(g, real_breakages):
         g[x][y] = g[x][y][:z]
 
 
-def iteration():
+def iteration(count_of_breakages):
     g, names = [], []
     tp, fp, fn = [0 for _ in range(0, 3)], [0 for _ in range(0, 3)], [0 for _ in range(0, 3)]
     read_genomes(source_data, g, names)
     real_breakages = [{} for _ in range(0, len(g))]
-    count_of_breakages = randint(30, 1200)
 
     #generate breakages
     for _ in range(0, count_of_breakages):
@@ -188,27 +187,50 @@ def iteration():
 
     return tp, fp, fn
 
-count_of_iterations = 100
+count_of_iterations = 10
 source_data = "MRDQHC.txt"
-
-TP, FP, FN = [], [], []
 initial_fragment_ends = get_initial_fragment_ends()
-for i in range(0, count_of_iterations):
-    print(i)
-    tp, fp, fn = iteration()
-    TP.append(tp)
-    FP.append(fp)
-    FN.append(fn)
+
+def simulation(count_of_breakages):
+    TP, FP, FN = [], [], []
+    for i in range(0, count_of_iterations):
+        print("iter " + str(i))
+        tp, fp, fn = iteration(count_of_breakages)
+        TP.append(tp)
+        FP.append(fp)
+        FN.append(fn)
 
     tp = list(map(lambda x: sum(x)/count_of_iterations, list(zip(*TP))))
     fp = list(map(lambda x: sum(x)/count_of_iterations, list(zip(*FP))))
     fn = list(map(lambda x: sum(x)/count_of_iterations, list(zip(*FN))))
 
-with open("statistic.txt", 'w') as out:
-    print("True positive: " + str(tp), file=out)
-    print("False positive: " + str(fp), file=out)
-    print("False negative: " + str(fn), file=out)
+    return tp, fp, fn
 
+TP_init, TP_12, TP_all, FP_init, FP_12, FP_all, FN_init, FN_12, FN_all = [], [], [], [], [], [], [], [], []
+for i in range(1, 2):
+    print("k = " + str(1050))
+    tp, fp, fn = simulation(1050)
+    TP_init.append(tp[0])
+    TP_12.append(tp[1])
+    TP_all.append(tp[2])
+    FP_init.append(fp[0])
+    FP_12.append(fp[1])
+    FP_all.append(fp[2])
+    FN_init.append(fn[0])
+    FN_12.append(fn[1])
+    FN_all.append(fn[2])
+
+
+with open("statistic.txt", 'w') as out:
+    print(TP_init, file=out)
+    print(TP_12, file=out)
+    print(TP_all, file=out)
+    print(FP_init, file=out)
+    print(FP_12, file=out)
+    print(FP_all, file=out)
+    print(FN_init, file=out)
+    print(FN_12, file=out)
+    print(FN_all, file=out)
 
 
 
