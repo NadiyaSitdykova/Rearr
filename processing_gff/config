@@ -1,0 +1,15 @@
+# Name of subtree
+gambiae_complex
+
+# Number of genomes
+5
+
+# Genomes and corresponding names of gff files
+melas            AMELC.gff4mysql.txt
+quadriannulatus  AQUAS.gff4mysql.txt
+arabiensis       AARAD.gff4mysql.txt
+merus            AMERM.gff4mysql.txt
+gambiae          AGAMP.gff4mysql.txt
+
+# Name of tabtext file
+ODBMOZ2_Pyretophorus_tabtext
