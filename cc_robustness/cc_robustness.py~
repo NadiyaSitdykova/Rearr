@@ -130,8 +130,8 @@ subsets = prepare_data.get_list_of_subsets(k, dataset)
 ys = []
 for subset in subsets:
     #print(subset)
-    prepare_data.generate_blocks_for_subset(subset, filename, "tmp.txt")
-    prepare_data.generate_cfg_for_subset(subset, "tmp.cfg")
+    prepare_data.generate_blocks_for_subset(subsets[0], filename, "tmp.txt")
+    prepare_data.generate_cfg_for_subset(subsets[0], "tmp.cfg")
     ys.append(subset_processing("tmp.txt", "tmp.cfg", path_to_mgra))
 
 mean = list(map(lambda x: float(sum(x))/len(subsets), list(zip(*ys))))
