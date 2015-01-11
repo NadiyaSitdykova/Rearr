@@ -1,0 +1,20 @@
+shared blocks: 10639
+all indels: 9023
+
+M
+indels in subset and somewhere else: 4748
+
+R
+indels in subset and somewhere else: 4075
+
+D
+indels in subset and somewhere else: 3950
+
+Q
+indels in subset and somewhere else: 4479
+
+H
+indels in subset and somewhere else: 7056
+
+C
+indels in subset and somewhere else: 5325

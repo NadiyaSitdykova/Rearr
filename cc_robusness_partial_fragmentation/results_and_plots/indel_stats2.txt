@@ -1,0 +1,48 @@
+shared blocks: 10639
+all indels: 9023
+
+MR
+indels in subset and somewhere else: 3070
+
+MD
+indels in subset and somewhere else: 3157
+
+MQ
+indels in subset and somewhere else: 2879
+
+MH
+indels in subset and somewhere else: 3435
+
+MC
+indels in subset and somewhere else: 1960
+
+RD
+indels in subset and somewhere else: 2597
+
+RQ
+indels in subset and somewhere else: 2332
+
+RH
+indels in subset and somewhere else: 2688
+
+RC
+indels in subset and somewhere else: 1300
+
+DQ
+indels in subset and somewhere else: 2724
+
+DH
+indels in subset and somewhere else: 3143
+
+DC
+indels in subset and somewhere else: 1723
+
+QH
+indels in subset and somewhere else: 3575
+
+QC
+indels in subset and somewhere else: 2203
+
+HC
+indels in subset and somewhere else: 2865
+
