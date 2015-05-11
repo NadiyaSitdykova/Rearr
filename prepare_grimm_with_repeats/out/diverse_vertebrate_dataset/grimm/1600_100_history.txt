@@ -1,0 +1,6 @@
+>opossum
+6295t ~ 5840h
+>human
+>chimp
+>rat
+>dog
