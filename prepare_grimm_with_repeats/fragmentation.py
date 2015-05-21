@@ -26,7 +26,7 @@ def chrome_len_one(g, x, y, z):
     return len(g[x][y]) == 1
 
 def is_not_repeat(g, x, y, z):
-    return chrome_len_one(g, x, y, z) or len(g[x][y][z]) < 6 or g[x][y][z][-6:] != "repeat"
+    return chrome_len_one(g, x, y, z) or len(g[x][y][z]) < 8 or g[x][y][z][-8:] != "__repeat"
 
 def remove_repeats(g):
     new_g = []
@@ -35,7 +35,7 @@ def remove_repeats(g):
         for chrome in genome:
             new_chrome = []
             for block in chrome:
-                if len(block) < 6 or block[-6:] != "repeat":
+                if len(block) < 8 or block[-8:] != "__repeat":
                     new_chrome.append(block)
             if len(new_chrome) > 0:
                 new_genome.append(new_chrome)

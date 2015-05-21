@@ -120,7 +120,7 @@ if __name__ == '__main__':
                 s = ""
                 for gene in genes:
                     if gene.is_repeat:
-                        s += str(gene.strand * repeat_to_label[gene.id]) + "_repeat "
+                        s += str(gene.strand * repeat_to_label[gene.id]) + "__repeat "
                     else:
                         s += str(gene.strand * gene_to_label[gene.id]) + " "
                 s += "$\n"
