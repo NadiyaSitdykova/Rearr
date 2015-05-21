@@ -1,0 +1,5 @@
+human 23t 313t
+orangutan 157t 40t
+orangutan 23h 1568h
+gorilla 19t 3760t
+gorilla 23h 1185h

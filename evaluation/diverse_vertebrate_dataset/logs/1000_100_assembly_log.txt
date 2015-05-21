@@ -1,0 +1,11 @@
+rat 295h 295t
+opossum 9234t 7200t
+opossum 284h 13180t
+opossum 1950h 176t
+opossum 2303t 3221t
+dog 562t 3901t
+dog 9616t 10h
+dog 176h 906t
+human 216t 276t
+human 10t 272h
+chimp 10t 636h

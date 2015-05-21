@@ -1,0 +1,5 @@
+dog 10h 9616t
+dog 906t 176h
+dog 562t 3901t
+human 272h 276t
+rat 295t 295h
