@@ -1,4 +1,0 @@
->chimp
->orangutan
->human
->gorilla

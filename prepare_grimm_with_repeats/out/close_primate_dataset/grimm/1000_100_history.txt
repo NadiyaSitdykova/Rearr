@@ -1,5 +1,0 @@
->chimp
->orangutan
->human
-11696h ~ 40t
->gorilla

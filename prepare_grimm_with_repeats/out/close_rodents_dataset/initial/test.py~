@@ -1,0 +1,5 @@
+with open("tree_shrew.txt", 'r') as f:
+   for line in f.readlines():
+      blocks = line.split()
+      if len(blocks) <= 2:
+         print("".join(blocks))

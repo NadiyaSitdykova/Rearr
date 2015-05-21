@@ -1,7 +1,0 @@
->opossum
-6295t ~ 5840h
-4827t ~ 212h
->human
->chimp
->rat
->dog
