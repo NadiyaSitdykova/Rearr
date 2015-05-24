@@ -1,0 +1,4 @@
+gorilla 2 43t 1496t
+gorilla 1 2769t 3590h
+human 2 740t 43h
+chimp 2 2639t 316t
