@@ -1,0 +1,6 @@
+rat 1 2224t 2224h
+rat 2 2592t 2592h
+human 2 144h 61t
+human 1 219t 194h
+chimp 1 389t 7400h
+chimp 2 405h 11846t

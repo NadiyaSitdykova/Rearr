@@ -3,10 +3,11 @@ from matplotlib import cm
 from matplotlib.ticker import LinearLocator
 import matplotlib.pyplot as plt
 import numpy as np
-import sys
+import sys, os
 
 if __name__ == '__main__':
-    full_name = sys.argv[1]
+    path = sys.argv[1]
+    #full_name = sys.argv[1]
     fig = plt.figure()
     ax = fig.gca(projection='3d')
     x_start = 400
@@ -25,18 +26,25 @@ if __name__ == '__main__':
         ys_list.append(y_list)
     xs = np.array(xs_list)
     ys = np.array(ys_list)
-    zs = []
-    with open(full_name, 'r') as file:
-        for line in file.readlines():
-            zs.append(map(lambda x: float(x), line.split()))
-    surf = ax.plot_surface(xs, ys, zs, rstride=1, cstride=1, cmap=cm.spectral,linewidth=0, antialiased=False)
-    ax.set_zlim(0, 100)
-    ax.zaxis.set_major_locator(LinearLocator(11))
-    fig.colorbar(surf, shrink=0.8, aspect=10)
-    ax.set_xlabel('Repeat min length')
-    ax.set_ylabel('Repeat min identity')
-    ax.set_zlabel(full_name.split("/")[-1][:-4])
-    plt.savefig(full_name[:-4] + ".png")
+    fig = plt.figure()
+
+    for filename in os.listdir(path):
+        if filename.endswith(".txt"):
+            ax = fig.add_subplot(111, projection='3d')
+            full_name = path + filename
+            zs = []
+            with open(full_name, 'r') as file:
+                for line in file.readlines():
+                    zs.append(map(lambda x: float(x), line.split()))
+            surf = ax.plot_surface(xs, ys, zs, rstride=1, cstride=1, cmap=cm.spectral,linewidth=0, antialiased=False)
+            #ax.set_zlim(0, 100)
+            ax.zaxis.set_major_locator(LinearLocator(11))
+            fig.colorbar(surf, shrink=0.8, aspect=10)
+            ax.set_xlabel('Repeat min length')
+            ax.set_ylabel('Repeat min identity')
+            ax.set_zlabel(full_name.split("/")[-1][:-4])
+            plt.savefig(full_name[:-4] + ".png")
+            plt.clf()
 
 
 
