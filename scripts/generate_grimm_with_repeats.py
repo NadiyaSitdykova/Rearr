@@ -164,6 +164,19 @@ if __name__ == '__main__':
             genes.sort(key=lambda x: x.mid)
 
     print("sort done")
+
+    #save initial(unfragmented) grimms without repeats
+    for genome, chromes in genome.items():
+        with open(OUT_PATH + genome + ".txt", 'w') as grimm_out:
+            grimm_out.write(">" + genome + "\n")
+            for chrome, genes in chromes.items():
+                if len(genes) > 1:
+                    s = ""
+                    for gene in genes:
+                        if not gene.is_repeat():
+                            s += str(gene.strand * gene_to_label[gene.id]) + " "
+                    grimm_out.write(s + "$\n")
+
     #compute grid of grimm with repeats
     xs_count = int((X_END - X_START) / X_MULT) + 1
     ys_count = int((Y_END - Y_START) / Y_MULT) + 1
