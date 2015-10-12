@@ -167,7 +167,7 @@ if __name__ == '__main__':
 
     #save initial(unfragmented) grimms without repeats
     for genome, chromes in genome.items():
-        with open(OUT_PATH + genome + ".txt", 'w') as grimm_out:
+        with open(OUT_PATH "grimm/" + genome + ".txt", 'w') as grimm_out:
             grimm_out.write(">" + genome + "\n")
             for chrome, genes in chromes.items():
                 if len(genes) > 1:
